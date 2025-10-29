@@ -3,10 +3,12 @@ import { registerCopilotKit } from "@ag-ui/mastra/copilotkit";
 import { LibSQLStore } from "@mastra/libsql";
 import { chatRoute } from "@mastra/ai-sdk";
 import { ghibliAgent } from "./agents/ghibli-agent";
+import { weatherAgent } from "./agents/weather-agent";
 
 export const mastra = new Mastra({
   agents: {
     ghibliAgent,
+    weatherAgent,
   },
   storage: new LibSQLStore({
     url: ":memory:",

@@ -19,48 +19,75 @@ import { Sparkles, Bot, MessageSquare, type LucideIcon } from "lucide-react";
 import { AISdkDemo } from "@/demos/ai-sdk";
 import { CopilotKitDemo } from "@/demos/copilot-kit";
 import { AssistantUIDemo } from "@/demos/assistant-ui";
+import { GenerativeUserInterfacesDemo } from "./demos/ai-sdk/generative-user-interfaces";
 
-type Framework = "aisdk" | "assistant-ui" | "copilot-kit";
+type SidebarId = "aisdk" | "assistant-ui" | "copilot-kit" | "generative-user-interfaces";
 
-type FrameworkEntry = {
-  id: Framework;
+type SidebarEntry = {
+  id: SidebarId;
   name: string;
   description: string;
   icon: LucideIcon;
 };
 
-const FRAMEWORKS: FrameworkEntry[] = [
+type SidebarGroupEntry = {
+  groupId: string;
+  groupName: string;
+  items: SidebarEntry[];
+};
+
+const SIDEBAR: SidebarGroupEntry[] = [
   {
-    id: "aisdk",
-    name: "AI SDK",
-    icon: Sparkles,
-    description: "Built with Vercel's AI SDK and @mastra/ai-sdk",
+    groupId: "chat-examples",
+    groupName: "Chat Examples",
+    items: [
+      {
+        id: "aisdk",
+        name: "AI SDK",
+        icon: Sparkles,
+        description: "Built with Vercel's AI SDK and @mastra/ai-sdk",
+      },
+      {
+        id: "assistant-ui",
+        name: "Assistant UI",
+        icon: Bot,
+        description: "TODO",
+      },
+      {
+        id: "copilot-kit",
+        name: "Copilot Kit",
+        icon: MessageSquare,
+        description: "Built with Copilot Kit's Chat component",
+      },
+    ],
   },
   {
-    id: "assistant-ui",
-    name: "Assistant UI",
-    icon: Bot,
-    description: "TODO",
-  },
-  {
-    id: "copilot-kit",
-    name: "Copilot Kit",
-    icon: MessageSquare,
-    description: "Built with Copilot Kit's Chat component",
-  },
+    groupId: "ai-sdk",
+    groupName: "AI SDK",
+    items: [
+      {
+        id: "generative-user-interfaces",
+        name: "Generative UIs",
+        icon: Sparkles,
+        description: "How to build custom UIs for tool responses",
+      }
+    ]
+  }
 ];
 
 export default function Page() {
-  const [activeFramework, setActiveFramework] = useState<Framework>("aisdk");
+  const [activeId, setActiveId] = useState<SidebarId>("aisdk");
 
   const renderDemo = () => {
-    switch (activeFramework) {
+    switch (activeId) {
       case "aisdk":
         return <AISdkDemo />;
       case "copilot-kit":
         return <CopilotKitDemo />;
       case "assistant-ui":
         return <AssistantUIDemo />;
+      case "generative-user-interfaces":
+        return <GenerativeUserInterfacesDemo />;
     }
   };
 
@@ -75,23 +102,28 @@ export default function Page() {
             </div>
           </SidebarHeader>
           <SidebarContent>
-            <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-              <SidebarGroupLabel>Chat Examples</SidebarGroupLabel>
-              <SidebarMenu>
-                {FRAMEWORKS.map((item) => (
-                  <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton
-                      className="hover:cursor-pointer"
-                      onClick={() => setActiveFramework(item.id)}
-                      isActive={item.id === activeFramework}
-                    >
-                      <item.icon />
-                      <span>{item.name}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroup>
+            {SIDEBAR.map((group) => (
+              <SidebarGroup
+                key={group.groupId}
+                className="group-data-[collapsible=icon]:hidden"
+              >
+                <SidebarGroupLabel>{group.groupName}</SidebarGroupLabel>
+                <SidebarMenu>
+                  {group.items.map((item) => (
+                    <SidebarMenuItem key={item.id}>
+                      <SidebarMenuButton
+                        className="hover:cursor-pointer"
+                        onClick={() => setActiveId(item.id)}
+                        isActive={item.id === activeId}
+                      >
+                        <item.icon />
+                        <span>{item.name}</span>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroup>
+            ))}
           </SidebarContent>
           <SidebarFooter>
             This project demonstrates how you can use Mastra with different UI
@@ -107,13 +139,18 @@ export default function Page() {
                 className="mr-2 data-[orientation=vertical]:h-4"
               />
               <h1 className="font-bold text-xl">
-                {FRAMEWORKS.find((item) => item.id === activeFramework)?.name}
+                {
+                  SIDEBAR.flatMap((group) => group.items).find(
+                    (item) => item.id === activeId,
+                  )?.name
+                }
               </h1>
             </div>
             <div>
               {
-                FRAMEWORKS.find((item) => item.id === activeFramework)
-                  ?.description
+                SIDEBAR.flatMap((group) => group.items).find(
+                  (item) => item.id === activeId,
+                )?.description
               }
             </div>
           </header>

@@ -1,8 +1,6 @@
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
-import { ghibliFilms, ghibliCharacters } from "../tools/ghibli";
-
-const memory = new Memory();
+import { ghibliFilms, ghibliCharacters } from "../tools/ghibli-tool";
 
 export const ghibliAgent = new Agent({
   name: "Ghibli Trivia Agent",
@@ -18,5 +16,5 @@ export const ghibliAgent = new Agent({
     },
   ],
   tools: { ghibliFilms, ghibliCharacters },
-  memory,
+  memory: new Memory(),
 });
