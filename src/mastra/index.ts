@@ -1,20 +1,47 @@
-import { Mastra } from '@mastra/core/mastra';
-import { LibSQLStore } from '@mastra/libsql';
-import { chatRoute } from '@mastra/ai-sdk';
-import { ghibliAgent } from './agents';
+import { Mastra } from "@mastra/core/mastra";
+import { registerCopilotKit } from "@ag-ui/mastra/copilotkit";
+import { LibSQLStore } from "@mastra/libsql";
+import { chatRoute, workflowRoute, networkRoute } from "@mastra/ai-sdk";
+import { ghibliAgent } from "./agents/ghibli-agent";
+import { weatherAgent } from "./agents/weather-agent";
+import { activitiesWorkflow } from "./workflows/activities-workflow";
+import { routingAgent } from "./agents/routing-agent";
+import { bgColorAgent } from "./agents/bg-color-agent";
 
 export const mastra = new Mastra({
-    agents: {
-        ghibliAgent,
+  agents: {
+    ghibliAgent,
+    weatherAgent,
+    routingAgent,
+    bgColorAgent,
+  },
+  workflows: {
+    activitiesWorkflow,
+  },
+  storage: new LibSQLStore({
+    url: ":memory:",
+  }),
+  server: {
+    cors: {
+      origin: "*",
+      allowMethods: ["*"],
+      allowHeaders: ["*"],
     },
-    storage: new LibSQLStore({
-        url: 'file:../../mastra.db'
-    }),
-    server: {
-        apiRoutes: [
-            chatRoute({
-                path: '/chat/:agentId',
-            }),
-        ],
-    },
-})
+    apiRoutes: [
+      chatRoute({
+        path: "/chat/:agentId",
+      }),
+      workflowRoute({
+        path: "/workflow/:workflowId",
+      }),
+      networkRoute({
+        path: "/network",
+        agent: "routingAgent",
+      }),
+      // @ts-expect-error - resourceId not necessary
+      registerCopilotKit({
+        path: "/copilotkit",
+      }),
+    ],
+  },
+});
