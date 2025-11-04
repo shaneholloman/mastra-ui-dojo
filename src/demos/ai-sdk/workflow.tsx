@@ -8,6 +8,7 @@ import {
   ToolOutput,
 } from "@/components/ai-elements/tool";
 import { Button } from "@/components/ui/button";
+import { MASTRA_BASE_URL } from "@/constants";
 import { Input } from "@/components/ui/input";
 import type { Forecast } from "@/mastra/shared";
 import { useChat } from "@ai-sdk/react";
@@ -67,7 +68,7 @@ export const WorkflowDemo = () => {
   const [input, setInput] = useState("");
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
-      api: "http://localhost:4111/workflow/activitiesWorkflow",
+      api: `${MASTRA_BASE_URL}/workflow/activitiesWorkflow`,
       prepareSendMessagesRequest: ({ messages }) => {
         return {
           body: {

@@ -6,6 +6,7 @@ import {
 import { ThreadList } from "@/components/assistant-ui/thread-list";
 import { Thread } from "@/components/assistant-ui/thread";
 import { changeBgColor } from "@/mastra/tools/color-change-tool";
+import { MASTRA_BASE_URL } from "@/constants";
 
 const suggestions = [
   {
@@ -21,7 +22,7 @@ const suggestions = [
 export const ClientAssistantUIDemo = () => {
   const runtime = useChatRuntime({
     transport: new AssistantChatTransport({
-      api: "http://localhost:4111/chat/bgColorAgent",
+      api: `${MASTRA_BASE_URL}/chat/bgColorAgent`,
     }),
     onToolCall: ({ toolCall }) => {
       if (toolCall.toolName === 'colorChangeTool') {

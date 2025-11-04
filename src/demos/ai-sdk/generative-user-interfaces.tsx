@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useState } from "react";
+import { MASTRA_BASE_URL } from "@/constants";
 import {
   Droplets,
   Wind,
@@ -120,7 +121,7 @@ export const GenerativeUserInterfacesDemo = () => {
   const [input, setInput] = useState("");
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
-      api: "http://localhost:4111/chat/weatherAgent",
+      api: `${MASTRA_BASE_URL}/chat/weatherAgent`,
     }),
   });
 

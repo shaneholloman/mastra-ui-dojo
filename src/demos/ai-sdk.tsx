@@ -44,6 +44,7 @@ import {
 import { Loader } from "@/components/ai-elements/loader";
 import { DefaultChatTransport } from "ai";
 import { Suggestion, Suggestions } from "@/components/ai-elements/suggestion";
+import { MASTRA_BASE_URL } from "@/constants";
 
 const models = [
   {
@@ -68,7 +69,7 @@ export const AISdkDemo = () => {
   const [webSearch, setWebSearch] = useState(false);
   const { messages, sendMessage, status, regenerate } = useChat({
     transport: new DefaultChatTransport({
-      api: "http://localhost:4111/chat/ghibliAgent",
+      api: `${MASTRA_BASE_URL}/chat/ghibliAgent`,
     }),
   });
 

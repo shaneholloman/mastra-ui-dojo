@@ -5,6 +5,7 @@ import {
 } from "@assistant-ui/react-ai-sdk";
 import { ThreadList } from "@/components/assistant-ui/thread-list";
 import { Thread } from "@/components/assistant-ui/thread";
+import { MASTRA_BASE_URL } from "@/constants";
 
 const suggestions = [
   {
@@ -28,7 +29,7 @@ const suggestions = [
 export const AssistantUIDemo = () => {
   const runtime = useChatRuntime({
     transport: new AssistantChatTransport({
-      api: "http://localhost:4111/chat/ghibliAgent",
+      api: `${MASTRA_BASE_URL}/chat/ghibliAgent`,
     }),
   });
 

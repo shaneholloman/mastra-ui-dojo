@@ -2,11 +2,12 @@ import { CopilotChat } from "@copilotkit/react-ui";
 import { CopilotKit, useFrontendTool } from "@copilotkit/react-core";
 import "@copilotkit/react-ui/styles.css";
 import { changeBgColor } from "@/mastra/tools/color-change-tool";
+import { MASTRA_BASE_URL } from "@/constants";
 
 export function ClientCopilotKitDemo() {
   return (
     <CopilotKit
-      runtimeUrl="http://localhost:4111/copilotkit"
+      runtimeUrl={`${MASTRA_BASE_URL}/copilotkit`}
       agent="bgColorAgent"
     >
       <Chat />

@@ -16,6 +16,7 @@ import { Action, Actions } from "@/components/ai-elements/actions";
 import { Fragment, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { Response } from "@/components/ai-elements/response";
+import { MASTRA_BASE_URL } from "@/constants";
 import { CopyIcon, RefreshCcwIcon } from "lucide-react";
 import {
   Source,
@@ -42,7 +43,7 @@ export const NetworkDemo = () => {
   const [input, setInput] = useState("");
   const { messages, sendMessage, status, regenerate } = useChat({
     transport: new DefaultChatTransport({
-      api: "http://localhost:4111/network",
+      api: `${MASTRA_BASE_URL}/network`,
     }),
   });
 
