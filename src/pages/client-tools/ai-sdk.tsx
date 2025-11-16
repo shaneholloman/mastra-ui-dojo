@@ -50,6 +50,7 @@ const ClientAISdkDemo = () => {
   const [input, setInput] = useState("");
   const { messages, sendMessage, status, regenerate } = useChat({
     transport: new DefaultChatTransport({
+      // Defined through chatRoute() in src/mastra/index.ts
       api: `${MASTRA_BASE_URL}/chat/bgColorAgent`,
     }),
     onToolCall: ({ toolCall }) => {

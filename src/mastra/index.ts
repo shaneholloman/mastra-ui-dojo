@@ -56,12 +56,15 @@ export const mastra = new Mastra({
       allowHeaders: ["*"],
     },
     apiRoutes: [
+      // See https://mastra.ai/docs/frameworks/agentic-uis/ai-sdk#chatroute
       chatRoute({
         path: "/chat/:agentId",
       }),
+      // See https://mastra.ai/docs/frameworks/agentic-uis/ai-sdk#workflowroute
       workflowRoute({
         path: "/workflow/:workflowId",
       }),
+      // See https://mastra.ai/docs/frameworks/agentic-uis/ai-sdk#networkroute
       networkRoute({
         path: "/network",
         agent: "routingAgent",

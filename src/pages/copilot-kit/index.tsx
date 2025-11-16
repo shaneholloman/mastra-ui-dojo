@@ -6,6 +6,7 @@ import { MASTRA_BASE_URL } from "@/constants";
 function CopilotKitDemo() {
   return (
     <CopilotKit
+      // Defined through registerCopilotKit() in src/mastra/index.ts
       runtimeUrl={`${MASTRA_BASE_URL}/copilotkit`}
       agent="ghibliAgent"
     >

@@ -7,6 +7,7 @@ import { MASTRA_BASE_URL } from "@/constants";
 function ClientCopilotKitDemo() {
   return (
     <CopilotKit
+      // Defined through registerCopilotKit() in src/mastra/index.ts
       runtimeUrl={`${MASTRA_BASE_URL}/copilotkit`}
       agent="bgColorAgent"
     >

@@ -69,6 +69,7 @@ const AISdkDemo = () => {
   const [webSearch, setWebSearch] = useState(false);
   const { messages, sendMessage, status, regenerate } = useChat({
     transport: new DefaultChatTransport({
+      // Defined through chatRoute() in src/mastra/index.ts
       api: `${MASTRA_BASE_URL}/chat/ghibliAgent`,
     }),
   });

@@ -21,6 +21,7 @@ const suggestions = [
 const ClientAssistantUIDemo = () => {
   const runtime = useChatRuntime({
     transport: new AssistantChatTransport({
+      // Defined through chatRoute() in src/mastra/index.ts
       api: `${MASTRA_BASE_URL}/chat/bgColorAgent`,
     }),
     onToolCall: ({ toolCall }) => {
