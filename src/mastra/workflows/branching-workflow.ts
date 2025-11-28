@@ -232,4 +232,3 @@ export const branchingWorkflow = createWorkflow({
   ]);
 
 branchingWorkflow.commit();
-

@@ -14,11 +14,7 @@ import { DefaultChatTransport } from "ai";
 import { useMemo, useState } from "react";
 import { MASTRA_BASE_URL } from "@/constants";
 import { Badge } from "@/components/ui/badge";
-import {
-  CheckCircle2,
-  Loader2,
-  FileEdit,
-} from "lucide-react";
+import { CheckCircle2, Loader2, FileEdit } from "lucide-react";
 
 type ProgressData = {
   status: "in-progress" | "done";
@@ -49,11 +45,18 @@ const ProgressIndicator = ({
     <div className="grid gap-3 p-4 bg-muted rounded-lg">
       <div className="flex items-center gap-2">
         <Badge
-          variant={
-            progress.status === "in-progress" ? "secondary" : "outline"
-          }
+          variant={progress.status === "in-progress" ? "secondary" : "outline"}
         >
-          {progress.status === "in-progress" ? <><Loader2 className="w-5 h-5 animate-spin text-blue-500" /> In Progress</> : <><CheckCircle2 className="w-5 h-5 text-green-500" /> Done</>}
+          {progress.status === "in-progress" ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin text-blue-500" /> In
+              Progress
+            </>
+          ) : (
+            <>
+              <CheckCircle2 className="w-5 h-5 text-green-500" /> Done
+            </>
+          )}
         </Badge>
         <div className="font-semibold text-sm text-muted-foreground">
           {getStageName()}
@@ -180,10 +183,7 @@ const AgentNetworkCustomEventsDemo = () => {
                 {hasProgress && (
                   <div className="my-4 space-y-2">
                     {Object.entries(latestByStage).map(([stage, event]) => (
-                      <ProgressIndicator
-                        key={stage}
-                        progress={event}
-                      />
+                      <ProgressIndicator key={stage} progress={event} />
                     ))}
                   </div>
                 )}

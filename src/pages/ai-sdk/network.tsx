@@ -40,9 +40,8 @@ import {
 } from "@/components/ai-elements/tool";
 import type { ToolUIPart } from "ai";
 import { Badge } from "@/components/ui/badge";
-import type { NetworkDataPart} from "@mastra/ai-sdk";
+import type { NetworkDataPart } from "@mastra/ai-sdk";
 import { CodeBlock } from "@/components/ai-elements/code-block";
-
 
 type NetworkData = NetworkDataPart["data"];
 type StepStatus = NetworkData["steps"][number]["status"];
@@ -85,9 +84,14 @@ const DisplayAgentStep = ({
             <div className="text-xs font-semibold text-muted-foreground mb-1 uppercase">
               Input
             </div>
-            <CodeBlock language="json" code={typeof step.input === "string"
-                ? step.input
-                : JSON.stringify(step.input, null, 2)} />
+            <CodeBlock
+              language="json"
+              code={
+                typeof step.input === "string"
+                  ? step.input
+                  : JSON.stringify(step.input, null, 2)
+              }
+            />
           </div>
         )}
         <ToolOutput
@@ -213,17 +217,22 @@ const NetworkDemo = () => {
                       const networkData = (part as NetworkDataPart)
                         .data as NetworkData;
                       const steps = networkData.steps || [];
-                      
+
                       // Count unique agents
-                      const uniqueAgents = new Set(steps.map(s => s.name)).size;
+                      const uniqueAgents = new Set(steps.map((s) => s.name))
+                        .size;
                       const stepCount = steps.length;
-                      
-                      const description = uniqueAgents === stepCount 
-                        ? `${stepCount} agent${stepCount !== 1 ? "s" : ""} coordinated`
-                        : `${stepCount} step${stepCount !== 1 ? "s" : ""} across ${uniqueAgents} agent${uniqueAgents !== 1 ? "s" : ""}`;
+
+                      const description =
+                        uniqueAgents === stepCount
+                          ? `${stepCount} agent${stepCount !== 1 ? "s" : ""} coordinated`
+                          : `${stepCount} step${stepCount !== 1 ? "s" : ""} across ${uniqueAgents} agent${uniqueAgents !== 1 ? "s" : ""}`;
 
                       return (
-                        <div key={`${message.id}-${i}`} className="my-4 space-y-4">
+                        <div
+                          key={`${message.id}-${i}`}
+                          className="my-4 space-y-4"
+                        >
                           {/* Network Header */}
                           <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg border">
                             <NetworkIcon className="w-5 h-5 text-primary" />

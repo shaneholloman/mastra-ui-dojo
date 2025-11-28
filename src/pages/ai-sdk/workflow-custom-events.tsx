@@ -14,11 +14,7 @@ import { DefaultChatTransport } from "ai";
 import { useMemo, useState } from "react";
 import { MASTRA_BASE_URL } from "@/constants";
 import { Badge } from "@/components/ui/badge";
-import {
-  CheckCircle2,
-  Loader2,
-  GitBranch,
-} from "lucide-react";
+import { CheckCircle2, Loader2, GitBranch } from "lucide-react";
 
 type ProgressData = {
   status: "in-progress" | "done";
@@ -47,21 +43,26 @@ const ProgressIndicator = ({
   };
 
   return (
-    <div
-      className="grid gap-3 p-4 bg-muted rounded-lg"
-    >
+    <div className="grid gap-3 p-4 bg-muted rounded-lg">
       <div className="flex items-center gap-2">
-          <Badge
-            variant={
-              progress.status === "in-progress" ? "default" : "outline"
-            }
-            className="text-xs"
-          >
-            {progress.status === "in-progress" ? <><Loader2 className="w-5 h-5 animate-spin text-blue-500" /> In Progress</> : <><CheckCircle2 className="w-5 h-5 text-green-500" /> Done</>}
-          </Badge>
-          <div className="font-semibold text-sm text-muted-foreground">
-            {getStageName()}
-          </div>
+        <Badge
+          variant={progress.status === "in-progress" ? "default" : "outline"}
+          className="text-xs"
+        >
+          {progress.status === "in-progress" ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin text-blue-500" /> In
+              Progress
+            </>
+          ) : (
+            <>
+              <CheckCircle2 className="w-5 h-5 text-green-500" /> Done
+            </>
+          )}
+        </Badge>
+        <div className="font-semibold text-sm text-muted-foreground">
+          {getStageName()}
+        </div>
       </div>
       <div className="font-medium text-sm">{progress.message}</div>
     </div>
@@ -269,4 +270,3 @@ const WorkflowCustomEventsDemo = () => {
 };
 
 export default WorkflowCustomEventsDemo;
-

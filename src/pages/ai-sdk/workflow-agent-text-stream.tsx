@@ -77,9 +77,10 @@ const WorkflowAgentTextStreamingDemo = () => {
         return {
           body: {
             inputData: {
-              location: messages[messages.length - 1].parts.find(
-                (part) => part.type === "text",
-              )?.text || "",
+              location:
+                messages[messages.length - 1].parts.find(
+                  (part) => part.type === "text",
+                )?.text || "",
             },
           },
         };
@@ -130,9 +131,11 @@ const WorkflowAgentTextStreamingDemo = () => {
                 <Message key={index} from="assistant">
                   <MessageContent>
                     <div className="prose prose-sm dark:prose-invert">
-                      {status === 'streaming' ? <p className="text-muted-foreground italic">
-                        Agent analyzing...
-                      </p> : null}
+                      {status === "streaming" ? (
+                        <p className="text-muted-foreground italic">
+                          Agent analyzing...
+                        </p>
+                      ) : null}
                       <Response>{part.text}</Response>
                     </div>
                   </MessageContent>
@@ -190,4 +193,3 @@ const WorkflowAgentTextStreamingDemo = () => {
 };
 
 export default WorkflowAgentTextStreamingDemo;
-
