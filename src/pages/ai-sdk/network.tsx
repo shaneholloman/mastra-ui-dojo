@@ -41,6 +41,7 @@ import {
 import type { ToolUIPart } from "ai";
 import { Badge } from "@/components/ui/badge";
 import type { NetworkDataPart} from "@mastra/ai-sdk";
+import { CodeBlock } from "@/components/ai-elements/code-block";
 
 
 type NetworkData = NetworkDataPart["data"];
@@ -54,12 +55,12 @@ const STATUS_MAP: Record<StepStatus, ToolUIPart["state"]> = {
   waiting: "input-available",
 };
 
+// Convert routing-agent to Routing Agent
 const getAgentDisplayName = (stepName: string) => {
-  // Convert step names like "ghibliAgent" to "Ghibli Agent"
   return stepName
-    .replace(/([A-Z])/g, " $1")
-    .replace(/^./, (str) => str.toUpperCase())
-    .trim();
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 };
 
 const DisplayAgentStep = ({
@@ -84,16 +85,15 @@ const DisplayAgentStep = ({
             <div className="text-xs font-semibold text-muted-foreground mb-1 uppercase">
               Input
             </div>
-            <div className="text-sm bg-muted/50 p-2 rounded">
-              {typeof step.input === "string"
+            <CodeBlock language="json" code={typeof step.input === "string"
                 ? step.input
-                : JSON.stringify(step.input, null, 2)}
-            </div>
+                : JSON.stringify(step.input, null, 2)} />
           </div>
         )}
         <ToolOutput
           output={step.output as ToolUIPart["output"]}
           errorText={step.status === "failed" ? "Step failed" : undefined}
+          language="markdown"
         />
       </ToolContent>
     </Tool>
@@ -241,7 +241,7 @@ const NetworkDemo = () => {
                                   networkData.status === "finished"
                                     ? "default"
                                     : networkData.status === "running"
-                                      ? "destructive"
+                                      ? "outline"
                                       : "secondary"
                                 }
                               >

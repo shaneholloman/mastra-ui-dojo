@@ -17,9 +17,6 @@ import { Badge } from "@/components/ui/badge";
 import {
   CheckCircle2,
   Loader2,
-  FileText,
-  FileCheck,
-  Network,
   FileEdit,
 } from "lucide-react";
 
@@ -31,23 +28,11 @@ type ProgressData = {
 
 const ProgressIndicator = ({
   progress,
-  agentName,
 }: {
   progress: ProgressData & { stage?: string };
   agentName?: string;
 }) => {
   if (!progress) return null;
-
-  const getIcon = () => {
-    switch (progress.stage) {
-      case "report-generation":
-        return <FileText className="w-5 h-5" />;
-      case "report-review":
-        return <FileCheck className="w-5 h-5" />;
-      default:
-        return <Network className="w-5 h-5" />;
-    }
-  };
 
   const getStageName = () => {
     switch (progress.stage) {
@@ -61,36 +46,20 @@ const ProgressIndicator = ({
   };
 
   return (
-    <div className="flex items-center gap-3 p-4 bg-muted rounded-lg border-l-4 border-l-blue-500">
+    <div className="grid gap-3 p-4 bg-muted rounded-lg">
       <div className="flex items-center gap-2">
-        {progress.status === "in-progress" ? (
-          <Loader2 className="w-5 h-5 animate-spin text-blue-500" />
-        ) : (
-          <CheckCircle2 className="w-5 h-5 text-green-500" />
-        )}
-        {getIcon()}
-      </div>
-      <div className="flex-1">
-        <div className="flex items-center gap-2 mb-1">
-          {agentName && (
-            <div className="text-xs font-semibold text-muted-foreground">
-              {agentName}
-            </div>
-          )}
-          <div className="font-semibold text-sm text-muted-foreground">
-            {getStageName()}
-          </div>
-          <Badge
-            variant={
-              progress.status === "in-progress" ? "default" : "secondary"
-            }
-            className="text-xs"
-          >
-            {progress.status === "in-progress" ? "In Progress" : "Done"}
-          </Badge>
+        <Badge
+          variant={
+            progress.status === "in-progress" ? "secondary" : "outline"
+          }
+        >
+          {progress.status === "in-progress" ? <><Loader2 className="w-5 h-5 animate-spin text-blue-500" /> In Progress</> : <><CheckCircle2 className="w-5 h-5 text-green-500" /> Done</>}
+        </Badge>
+        <div className="font-semibold text-sm text-muted-foreground">
+          {getStageName()}
         </div>
-        <div className="font-medium text-sm">{progress.message}</div>
       </div>
+      <div className="font-medium text-sm">{progress.message}</div>
     </div>
   );
 };
@@ -214,7 +183,6 @@ const AgentNetworkCustomEventsDemo = () => {
                       <ProgressIndicator
                         key={stage}
                         progress={event}
-                        agentName={event.agentName}
                       />
                     ))}
                   </div>

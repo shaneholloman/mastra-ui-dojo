@@ -130,9 +130,9 @@ const WorkflowAgentTextStreamingDemo = () => {
                 <Message key={index} from="assistant">
                   <MessageContent>
                     <div className="prose prose-sm dark:prose-invert">
-                      <p className="text-muted-foreground italic">
+                      {status === 'streaming' ? <p className="text-muted-foreground italic">
                         Agent analyzing...
-                      </p>
+                      </p> : null}
                       <Response>{part.text}</Response>
                     </div>
                   </MessageContent>
@@ -163,11 +163,11 @@ const WorkflowAgentTextStreamingDemo = () => {
                     <Message from="assistant">
                       <MessageContent>
                         <div className="space-y-4">
-                          <div className="flex items-center gap-3">
-                            <div className="text-4xl font-bold text-primary">
+                          <div className="flex items-center gap-1">
+                            <div className="text-2xl leading-6 font-bold text-primary">
                               {lastStep.output.comfortScore}
                             </div>
-                            <div className="text-sm text-muted-foreground">
+                            <div className="text-base leading-6 text-muted-foreground">
                               / 100
                             </div>
                           </div>
