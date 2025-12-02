@@ -61,7 +61,7 @@ const ProgressIndicator = ({
         </Badge>
       </div>
       <div className="flex-1">
-        <div className="flex items-center gap-2 mb-1">
+        <div className="flex items-center gap-2">
           <div className="font-semibold text-sm text-muted-foreground">
             {getStageName()}
           </div>
