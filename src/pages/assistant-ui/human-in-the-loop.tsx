@@ -18,7 +18,7 @@ const suggestions = [
 const AssistantUIHitlDemo = () => {
   const runtime = useChatRuntime({
     transport: new AssistantChatTransport({
-      api: `${MASTRA_BASE_URL}/chat/hitlPlanningAgent`,
+      api: `${MASTRA_BASE_URL}/chat/hitl-planning-agent`,
     }),
     sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
   });

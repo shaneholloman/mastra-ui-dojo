@@ -222,7 +222,8 @@ const SIDEBAR: SidebarEntry[] = [
         title: "Human-in-the-Loop",
         url: "/assistant-ui/human-in-the-loop",
         description: "Involving humans in the AI decision-making process",
-        explanation: "A simpler human-in-the-loop example using Assistant UI. For a bigger example, visit https://github.com/assistant-ui/mastra-hitl",
+        explanation:
+          "A simpler human-in-the-loop example using Assistant UI. For a bigger example, visit https://github.com/assistant-ui/mastra-hitl",
       },
     ],
   },
