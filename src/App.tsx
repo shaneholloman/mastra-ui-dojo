@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { ThemeProvider } from "@/components/theme-provider";
 import Layout from "@/components/layout";
+import { Analytics } from '@vercel/analytics/react';
 
 import ChatAssistantUi from "@/pages/assistant-ui";
 import ClientToolsAssistantUi from "@/pages/client-tools/assistant-ui";
@@ -34,6 +35,7 @@ export default function Page() {
 
   return (
     <ThemeProvider>
+      <Analytics />
       <MastraReactProvider baseUrl={MASTRA_BASE_URL}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
