@@ -8,6 +8,7 @@ import {
   SensitiveDataFilter,
 } from "@mastra/observability";
 import { chatRoute, workflowRoute, networkRoute } from "@mastra/ai-sdk";
+import { jsonRenderStreamRoute } from "./routes/json-render-stream";
 import { ghibliAgent } from "./agents/ghibli-agent";
 import { responsesWeatherAgent } from "./agents/responses-weather-agent";
 import { weatherAgent } from "./agents/weather-agent";
@@ -29,6 +30,7 @@ import { weatherForecastAgent } from "./agents/weather-forecast-agent";
 import { planningAgent } from "./agents/planning-agent";
 import { hitlPlanningAgent } from "./agents/hitl-planning-agent";
 import { weatherApprovalAgent } from "./agents/weather-approval-agent";
+import { jsonRenderAgent } from "./agents/json-render-agent";
 
 export const mastra = new Mastra({
   agents: {
@@ -48,6 +50,7 @@ export const mastra = new Mastra({
     planningAgent,
     hitlPlanningAgent,
     weatherApprovalAgent,
+    jsonRenderAgent,
   },
   workflows: {
     activitiesWorkflow,
@@ -112,6 +115,7 @@ export const mastra = new Mastra({
         path: "/copilotkit",
         resourceId: "copilotkit-resource",
       }),
+      jsonRenderStreamRoute,
     ],
   },
 });
