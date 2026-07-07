@@ -1,3 +1,4 @@
+import { STORAGE_URL } from "@/constants";
 import { LibSQLStore } from "@mastra/libsql";
 
 /**
@@ -16,7 +17,7 @@ export function getStorage(): LibSQLStore {
   if (!store) {
     store = new LibSQLStore({
       id: "demo-storage",
-      url: process.env.TURSO_DATABASE_URL || "file:./.mastra-demo.db",
+      url: STORAGE_URL,
       authToken: process.env.TURSO_AUTH_TOKEN || "",
     });
   }
