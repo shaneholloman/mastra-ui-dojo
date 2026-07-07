@@ -17,7 +17,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Sparkles, Bot, MessageSquare, Info, Minus, Plus } from "lucide-react";
+import { Sparkles, Bot, Info, Minus, Plus } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,6 +44,9 @@ type SidebarItemEntry = {
   explanation: string;
   docsUrl?: string;
   concept?: string; // Items without concept appear at the root level
+  // Optional full title for the page header when the menu `title` is abbreviated
+  // (e.g. menu "Obs. Memory" but page "Observational Memory").
+  pageTitle?: string;
 };
 
 type SidebarEntry = {
@@ -60,6 +63,12 @@ type GroupedItems = {
 
 function MastraLogo({ className }: { className?: string }) {
   return <img alt="" className={cn("size-4", className)} src="/mastra.svg" />;
+}
+
+function CopilotKitLogo({ className }: { className?: string }) {
+  return (
+    <img alt="" className={cn("size-4", className)} src="/copilotkit.svg" />
+  );
 }
 
 const SIDEBAR: SidebarEntry[] = [
@@ -247,40 +256,148 @@ const SIDEBAR: SidebarEntry[] = [
   {
     id: "copilot-kit",
     title: "CopilotKit",
-    icon: MessageSquare,
+    icon: CopilotKitLogo,
     items: [
+      // ── Chat ──
       {
         id: "copilot-kit-chat",
-        title: "Chat",
+        title: "Basic",
         url: "/copilot-kit",
+        concept: "Chat",
         description: "How to use CopilotKit with Mastra",
         explanation:
           'By using the "@ag-ui/mastra" registerCopilotKit() function, a CopilotKit-compatible stream is automatically created with Mastra. This endpoint is defined as a runtimeUrl prop in the CopilotKit component.',
         docsUrl: "https://mastra.ai/docs/frameworks/agentic-uis/copilotkit",
       },
       {
-        id: "generative-user-interfaces",
-        title: "Generative UI",
-        url: "/copilot-kit/generative-user-interfaces",
-        description: "Building custom UIs for tool responses",
+        id: "copilot-kit-reasoning",
+        title: "Reasoning",
+        url: "/copilot-kit/reasoning",
+        concept: "Chat",
+        description: "See the model think before it answers",
         explanation:
-          "Uses useCopilotAction() to intercept tool calls in CopilotKit and render custom UI.",
+          "Uses an OpenAI reasoning model (o4-mini); the @ag-ui/mastra bridge emits reasoning events that CopilotChat renders inline.",
+      },
+      {
+        id: "copilot-kit-multimodal",
+        title: "Multimodal",
+        url: "/copilot-kit/multimodal",
+        concept: "Chat",
+        description: "Chat with images, not just text",
+        explanation:
+          "CopilotChat with attachments enabled: upload an image and the vision-capable Mastra agent describes it.",
+      },
+      // ── Generative UI (taxonomy: controlled → declarative → open) ──
+      {
+        id: "generative-user-interfaces",
+        title: "Tool-based",
+        url: "/copilot-kit/generative-user-interfaces",
+        concept: "Generative UI",
+        description: "Controlled: the agent calls a typed tool, you render it",
+        explanation:
+          "Tool-based generative UI: the agent calls the typed get_weather backend tool and the frontend renders the result with CopilotKit v2 useRenderTool(). You control exactly which component appears.",
+      },
+      {
+        id: "copilot-kit-a2ui",
+        title: "A2UI",
+        url: "/copilot-kit/a2ui",
+        concept: "Generative UI",
+        description: "Declarative: the agent describes the UI from a catalog",
+        explanation:
+          "A2UI generative UI: the agent calls generate_a2ui, getA2UITools composes and validates a UI surface from the shared catalog, and CopilotKit renders it in the chat. Cards are clickable and report the selected item back to the agent.",
+      },
+      {
+        id: "copilot-kit-open-generative-ui",
+        title: "Open Gen UI",
+        url: "/copilot-kit/open-generative-ui",
+        concept: "Generative UI",
+        description: "Open: the agent renders a full interactive app",
+        explanation:
+          "Open generative UI: the agent calls show_calculator when an interactive calculator is useful, and the frontend renders the live calculator component in the chat. Tool arguments can stream in progressively before the call completes.",
+      },
+      {
+        id: "copilot-kit-mcp-apps",
+        title: "MCP Apps",
+        url: "/copilot-kit/mcp-apps",
+        concept: "Generative UI",
+        description: "Interactive apps served over MCP (Excalidraw)",
+        explanation:
+          "MCP Apps (SEP-1865): the agent connects to Excalidraw's public MCP server (via @ag-ui/mcp-apps-middleware + a BuiltInAgent) and renders its interactive ui:// canvas inline in the chat. Ask it to draw a diagram.",
+      },
+      {
+        id: "copilot-kit-tool-rendering",
+        title: "Tool Rendering",
+        url: "/copilot-kit/tool-rendering",
+        concept: "Generative UI",
+        description: "Custom + catch-all renderers for tool calls",
+        explanation:
+          "One demo showing both a custom renderer for a specific tool (get_weather) and a catch-all renderer (useDefaultRenderTool) for any other tool (get_stock_price). The suggestion pills walk both paths.",
+      },
+      {
+        id: "copilot-kit-byoc",
+        title: "JSON Render",
+        url: "/copilot-kit/byoc",
+        concept: "Generative UI",
+        description: "Bring-your-own-component via json-render",
+        explanation:
+          "Bring-your-own-component: the agent returns a declarative json-render spec via a tool, and the frontend renders it with your own component registry (@json-render/react).",
+      },
+      // ── Interactivity ──
+      {
+        id: "copilot-kit-frontend-tools",
+        title: "Frontend Tools",
+        url: "/copilot-kit/frontend-tools",
+        concept: "Interactivity",
+        description: "Let the agent drive your app's UI",
+        explanation:
+          "Two useFrontendTool tools in one demo: a synchronous tool that changes the UI instantly and an asynchronous tool that awaits a simulated browser-side fetch before returning.",
       },
       {
         id: "copilot-kit-human-in-the-loop",
-        title: "Human-in-the-Loop",
+        title: "HITL",
         url: "/copilot-kit/human-in-the-loop",
-        description: "Involving humans in the AI decision-making process",
+        concept: "Interactivity",
+        description: "Pause for a human, then pick up where it left off",
         explanation:
-          "Demonstrates how to set up a human-in-the-loop workflow using CopilotKit with Mastra. This example showcases how to route specific tasks to human agents for review or approval before finalizing the AI's response, ensuring higher accuracy and reliability in critical applications.",
+          "Mastra's native tool suspend/resume bridged onto AG-UI. The agent's schedule_meeting tool suspend()s; the bridge emits the standard RUN_FINISHED interrupt outcome (and legacy on_interrupt); CopilotKit v2 useInterrupt renders a time picker and resolve() resumes the tool (requires CopilotKit >= 1.61.2).",
       },
       {
-        id: "client-copilot-kit",
-        title: "Client Tools",
-        url: "/copilot-kit/client-tools",
-        description: "Calling frontend tools in Copilot Kit",
+        id: "copilot-kit-shared-state",
+        title: "Shared State",
+        url: "/copilot-kit/shared-state",
+        concept: "Interactivity",
+        description: "You and the agent edit the same data, live",
         explanation:
-          "Uses CopilotKit's useFrontendTool() hook to register client-side tools. The colorChangeTool is defined with parameters and a handler that runs in the browser, allowing the Mastra agent to trigger frontend-only actions without server roundtrips.",
+          "Bidirectional shared state via Mastra working memory. Edit the recipe in the UI (write-back) or ask the agent to change it and watch fields update live (streamed as STATE_DELTA, snapshot-first). Also sends agent-context.",
+      },
+      // ── Agents ──
+      {
+        id: "copilot-kit-subagents",
+        title: "Subagents",
+        url: "/copilot-kit/subagents",
+        concept: "Agents",
+        description: "One agent hands work to specialists",
+        explanation:
+          "A Mastra supervisor delegates to research + writer sub-agents via tools, so each hand-off renders as its own agent card in the chat.",
+      },
+      {
+        id: "copilot-kit-background-tasks",
+        title: "Background",
+        url: "/copilot-kit/background-tasks",
+        concept: "Agents",
+        description: "Kick off long jobs without blocking the chat",
+        explanation:
+          "A background-eligible tool (run_deep_research) is dispatched out of the agentic loop; the @ag-ui/mastra bridge surfaces its lifecycle as AG-UI activity events (renderActivityMessages). With untilIdle the run stays open until the task completes and the result streams back, so the card advances to Completed.",
+      },
+      {
+        id: "copilot-kit-observational-memory",
+        title: "Obs. Memory",
+        pageTitle: "Observational Memory",
+        url: "/copilot-kit/observational-memory",
+        concept: "Agents",
+        description: "Watch the agent build long-term memory",
+        explanation:
+          "Mastra Observational Memory runs Observer/Reflector work in the background; the bridge surfaces it as activity events (opt-in via a dedicated route). It triggers on unobserved message size, so send the long suggested messages.",
       },
     ],
   },
@@ -355,9 +472,11 @@ function SidebarItem({
       <SidebarMenuSubButton
         onClick={() => onNavigate(item.url)}
         isActive={isActive}
-        className="hover:cursor-pointer"
+        className="h-auto min-h-7 items-start overflow-visible py-1.5 leading-snug hover:cursor-pointer [&>span:last-child]:overflow-visible [&>span:last-child]:whitespace-normal [&>span:last-child]:text-clip"
       >
-        {item.title}
+        <span className="min-w-0 whitespace-normal break-words leading-snug">
+          {item.title}
+        </span>
       </SidebarMenuSubButton>
     </SidebarMenuSubItem>
   );
@@ -439,9 +558,10 @@ export default function Page({ children }: { children: React.ReactNode }) {
   const pageTitleEntry = SIDEBAR.flatMap((group) => group.items).find(
     findEntry,
   );
+  const pageTitleText = pageTitleEntry?.pageTitle ?? pageTitleEntry?.title;
   const pageTitle = pageTitleEntry?.concept
-    ? `${pageTitleEntry.concept}: ${pageTitleEntry.title}`
-    : (pageTitleEntry?.title ?? "Title missing");
+    ? `${pageTitleEntry.concept}: ${pageTitleText}`
+    : (pageTitleText ?? "Title missing");
   const pageDescription =
     SIDEBAR.flatMap((group) => group.items).find(findEntry)?.description ??
     "Description missing";
@@ -473,9 +593,12 @@ export default function Page({ children }: { children: React.ReactNode }) {
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton className="hover:cursor-pointer">
-                        <sdk.icon /> {sdk.title}{" "}
-                        <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
-                        <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
+                        <sdk.icon className="size-4 shrink-0" />
+                        <span className="min-w-0 flex-1 truncate">
+                          {sdk.title}
+                        </span>
+                        <Plus className="ml-auto size-4 shrink-0 group-data-[state=open]/collapsible:hidden" />
+                        <Minus className="ml-auto size-4 shrink-0 group-data-[state=closed]/collapsible:hidden" />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
                     {sdk.items?.length ? (
@@ -549,7 +672,9 @@ export default function Page({ children }: { children: React.ReactNode }) {
           </div>
           <div className="px-4 lg:px-0">{pageDescription}</div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+        <div className="flex min-h-0 flex-1 flex-col gap-4 p-4 pt-0">
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );
