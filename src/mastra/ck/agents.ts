@@ -1,7 +1,7 @@
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { z } from "zod";
-import { getStorage } from "./storage";
+import { getStorage } from "../storage";
 import {
   weatherTool,
   stockPriceTool,

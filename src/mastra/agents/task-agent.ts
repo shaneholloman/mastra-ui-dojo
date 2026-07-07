@@ -12,6 +12,4 @@ export const taskAgent = new Agent({
   `,
   model: "mastra/openai/gpt-5-mini",
   tools: { taskTool },
-  // Using Mastra Memory Gateway instead of direct memory.
-  // memory: new Memory(),
 });

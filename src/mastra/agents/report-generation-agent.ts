@@ -11,6 +11,4 @@ export const reportGenerationAgent = new Agent({
   `,
   model: "mastra/openai/gpt-5-mini",
   tools: { reportGenerationTool },
-  // Using Mastra Memory Gateway instead of direct memory.
-  // memory: new Memory(),
 });

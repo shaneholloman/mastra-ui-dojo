@@ -45,7 +45,7 @@ import {
 import { a2uiDynamicSchemaAgent } from "./ck/a2ui";
 import { ckSubagentsAgent } from "./ck/network";
 import { ckByocAgent } from "./ck/byoc";
-import { getStorage } from "./ck/storage";
+import { getStorage } from "./storage";
 import { registerCopilotKitOM } from "./copilotkit-om-route";
 import { registerCopilotKitMcp } from "./copilotkit-mcp-route";
 
@@ -93,8 +93,6 @@ export const mastra = new Mastra({
   // (suspend/resume snapshot) and background-tasks demos, and backs the
   // working-memory / observational-memory agents.
   storage: getStorage(),
-  // Background Tasks are storage-backed; enable the manager for the
-  // ck_background_tasks demo.
   backgroundTasks: { enabled: true },
   observability: new Observability({
     configs: {

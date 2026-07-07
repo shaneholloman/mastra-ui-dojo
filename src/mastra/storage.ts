@@ -1,7 +1,7 @@
 import { LibSQLStore } from "@mastra/libsql";
 
 /**
- * Shared, file-backed storage for the CopilotKit demo agents.
+ * Shared, file-backed storage for the demo agents.
  *
  * File-backed (not ":memory:") on purpose: with connection pooling an in-memory
  * libsql gives each connection its own empty DB, so migrated tables
@@ -15,8 +15,9 @@ let store: LibSQLStore | undefined;
 export function getStorage(): LibSQLStore {
   if (!store) {
     store = new LibSQLStore({
-      id: "ck-storage",
-      url: process.env.LIBSQL_URL || "file:./.mastra-demo.db",
+      id: "demo-storage",
+      url: process.env.TURSO_DATABASE_URL || "file:./.mastra-demo.db",
+      authToken: process.env.TURSO_AUTH_TOKEN || "",
     });
   }
   return store;

@@ -21,6 +21,4 @@ export const reportAgentNetwork = new Agent({
     reportGenerationAgent,
     reportReviewAgent,
   },
-  // Using Mastra Memory Gateway instead of direct memory.
-  // memory: new Memory(),
 });

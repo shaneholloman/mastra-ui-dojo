@@ -23,6 +23,4 @@ export const orderProcessingAgent = new Agent({
   workflows: {
     orderFulfillmentWorkflow,
   },
-  // Using Mastra Memory Gateway instead of direct memory.
-  // memory: new Memory(),
 });

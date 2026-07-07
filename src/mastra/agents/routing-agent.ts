@@ -31,6 +31,4 @@ export const routingAgent = new Agent({
     ghibliFilms,
     ghibliCharacters,
   },
-  // Using Mastra Memory Gateway instead of direct memory.
-  // memory: new Memory(),
 });

@@ -27,6 +27,4 @@ export const planningAgent = new Agent({
       - Make sure steps are in logical order
 `,
   model: "mastra/openai/gpt-5-mini",
-  // Using Mastra Memory Gateway instead of direct memory.
-  // memory: new Memory(),
 });

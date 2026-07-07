@@ -7,6 +7,11 @@ settings:
 overrides:
   '@assistant-ui/tap': 0.3.2
 
+patchedDependencies:
+  mastra@1.18.1:
+    hash: a6e2b888cc9fb28fa8e8ffde4274db51faa9b03f9dba913975770dab41a22550
+    path: patches/mastra@1.18.1.patch
+
 importers:
 
   .:
@@ -248,7 +253,7 @@ importers:
         version: 16.5.0
       mastra:
         specifier: 1.18.1
-        version: 1.18.1(@hono/node-server@1.19.14(hono@4.12.14))(@mastra/core@1.50.0(@bufbuild/protobuf@2.11.0)(@cfworker/json-schema@4.1.1)(ai@5.0.179(zod@4.3.6))(express@5.2.1)(rxjs@7.8.1)(zod@4.3.6))(rxjs@7.8.1)(typescript@5.9.3)(zod@4.3.6)
+        version: 1.18.1(patch_hash=a6e2b888cc9fb28fa8e8ffde4274db51faa9b03f9dba913975770dab41a22550)(@hono/node-server@1.19.14(hono@4.12.14))(@mastra/core@1.50.0(@bufbuild/protobuf@2.11.0)(@cfworker/json-schema@4.1.1)(ai@5.0.179(zod@4.3.6))(express@5.2.1)(rxjs@7.8.1)(zod@4.3.6))(rxjs@7.8.1)(typescript@5.9.3)(zod@4.3.6)
       prettier:
         specifier: 3.7.4
         version: 3.7.4
@@ -12197,7 +12202,7 @@ snapshots:
 
   marked@16.4.2: {}
 
-  mastra@1.18.1(@hono/node-server@1.19.14(hono@4.12.14))(@mastra/core@1.50.0(@bufbuild/protobuf@2.11.0)(@cfworker/json-schema@4.1.1)(ai@5.0.179(zod@4.3.6))(express@5.2.1)(rxjs@7.8.1)(zod@4.3.6))(rxjs@7.8.1)(typescript@5.9.3)(zod@4.3.6):
+  mastra@1.18.1(patch_hash=a6e2b888cc9fb28fa8e8ffde4274db51faa9b03f9dba913975770dab41a22550)(@hono/node-server@1.19.14(hono@4.12.14))(@mastra/core@1.50.0(@bufbuild/protobuf@2.11.0)(@cfworker/json-schema@4.1.1)(ai@5.0.179(zod@4.3.6))(express@5.2.1)(rxjs@7.8.1)(zod@4.3.6))(rxjs@7.8.1)(typescript@5.9.3)(zod@4.3.6):
     dependencies:
       '@babel/parser': 7.29.7
       '@babel/types': 7.29.7

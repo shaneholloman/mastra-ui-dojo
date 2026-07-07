@@ -106,6 +106,9 @@
   "pnpm": {
     "overrides": {
       "@assistant-ui/tap": "0.3.2"
+    },
+    "patchedDependencies": {
+      "mastra@1.18.1": "patches/mastra@1.18.1.patch"
     }
   }
 }

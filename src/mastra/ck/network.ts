@@ -2,7 +2,7 @@ import { Agent } from "@mastra/core/agent";
 import { createTool } from "@mastra/core/tools";
 import { Memory } from "@mastra/memory";
 import { z } from "zod";
-import { getStorage } from "./storage";
+import { getStorage } from "../storage";
 import { weatherTool, stockPriceTool } from "./tools";
 
 const MODEL = "mastra/openai/gpt-5-mini";

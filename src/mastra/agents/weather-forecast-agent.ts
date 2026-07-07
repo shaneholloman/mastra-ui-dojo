@@ -19,6 +19,4 @@ export const weatherForecastAgent = new Agent({
   `,
   model: "mastra/openai/gpt-5-mini",
   tools: { nestedAgentStreamTool: nestedWeatherAgentStreamTool },
-  // Using Mastra Memory Gateway instead of direct memory.
-  // memory: new Memory(),
 });

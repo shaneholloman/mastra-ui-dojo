@@ -11,6 +11,4 @@ export const inventoryCheckAgent = new Agent({
   `,
   model: "mastra/openai/gpt-5-mini",
   tools: { inventoryCheckTool },
-  // Using Mastra Memory Gateway instead of direct memory.
-  // memory: new Memory(),
 });
