@@ -167,7 +167,7 @@ export const mastra = new Mastra({
       // observational-memory demo page (agent="ck_observational_memory").
       registerCopilotKitOM({
         path: "/copilotkit-om",
-        resourceId: "copilotkit-resource",
+        resourceId: "copilotkit-resource-om",
         observationalMemory: ["ck_observational_memory"],
       }),
       // Dedicated route with untilIdle for the background-tasks demo, so the run
@@ -176,7 +176,7 @@ export const mastra = new Mastra({
       // See https://mastra.ai/docs/agents/background-tasks.
       registerCopilotKitOM({
         path: "/copilotkit-bg",
-        resourceId: "copilotkit-resource",
+        resourceId: "copilotkit-resource-bg",
         untilIdle: ["ck_background_tasks"],
       }),
       // Self-managed BuiltInAgent wired to Excalidraw's public MCP server via
